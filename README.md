@@ -1,0 +1,2 @@
+# prune
+trivia prune
