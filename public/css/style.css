@@ -1,0 +1,161 @@
+/* Estilos Globales inspirados en la estética PRÜNE */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #fcfbfa;
+    color: #1a1a1a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    padding: 30px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+/* Encabezados y Tipografía */
+.brand-title {
+    font-size: 3rem;
+    font-weight: 300;
+    letter-spacing: 6px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #1a1a1a;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+.brand-subtitle {
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    color: #666;
+    text-transform: uppercase;
+    margin-top: 5px;
+    margin-bottom: 40px;
+}
+
+/* Componentes de Juego */
+.quiz-container {
+    background: #ffffff;
+    padding: 25px;
+    border: 1px solid #e5e0da;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+    margin-bottom: 30px;
+}
+
+#question-text {
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin-bottom: 25px;
+    color: #2c2c2c;
+}
+
+.options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Botones */
+.btn, .btn-option {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    border: none;
+    padding: 14px 20px;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease;
+}
+
+.btn-option {
+    background-color: #f4f1ec;
+    color: #1a1a1a;
+    border: 1px solid #e5e0da;
+    text-align: left;
+}
+
+.btn-option:hover {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    border-color: #1a1a1a;
+}
+
+.btn-start {
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+#feedback-box {
+    margin-top: 20px;
+    padding: 15px;
+    border-top: 1px solid #e5e0da;
+}
+
+#feedback-text {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+/* Datos Curiosos */
+.fun-fact-section {
+    background-color: #f4f1ec;
+    padding: 20px;
+    margin-bottom: 40px;
+    border-left: 3px solid #1a1a1a;
+    text-align: left;
+}
+
+.fun-fact-section h3 {
+    margin: 0 0 8px 0;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #555;
+}
+
+.fun-fact-section p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: #333;
+}
+
+/* Footer y QR */
+.qr-container {
+    margin-top: 20px;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+#qr-code {
+    margin-top: 10px;
+    margin-bottom: 8px;
+    border: 1px solid #e5e0da;
+    padding: 5px;
+    background: #fff;
+}
+
+.qr-link {
+    color: #1a1a1a;
+    text-decoration: none;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.qr-link:hover {
+    text-decoration: underline;
+}

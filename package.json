@@ -1,0 +1,12 @@
+{
+  "name": "trivia-prune",
+  "version": "1.0.0",
+  "description": "Trivia interactiva sobre la marca PRÜNE",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

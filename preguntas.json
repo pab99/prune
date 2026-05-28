@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "pregunta": "¿En qué año se fundó la marca PRÜNE en Argentina?",
+    "opciones": ["1995", "1999", "2003", "2007"],
+    "correcta": 1,
+    "explicacion": "PRÜNE fue fundada en 1999 por Gary Miret y María Inés Baqué, revolucionando el mercado de la marroquinería local."
+  },
+  {
+    "id": 2,
+    "pregunta": "¿Cuál fue el producto insignia con el que PRÜNE saltó a la fama?",
+    "opciones": ["Perfumes", "Relojes", "Carteras de cuero", "Zapatillas urbanas"],
+    "correcta": 2,
+    "explicacion": "Las carteras de cuero con diseño de vanguardia y alta calidad fueron el pilar del nacimiento de la marca."
+  },
+  {
+    "id": 3,
+    "pregunta": "¿Dónde se inauguró el primer local exclusivo de PRÜNE?",
+    "opciones": ["Unicenter Shopping", "Alto Palermo Shopping", "Paseo Alcorta", "Galerías Pacífico"],
+    "correcta": 2,
+    "explicacion": "El primer local exclusivo de la marca abrió sus puertas en el Paseo Alcorta."
+  },
+  {
+    "id": 4,
+    "pregunta": "Además de Argentina, ¿en qué otros países de la región tiene presencia PRÜNE?",
+    "opciones": ["Chile, Uruguay, Perú y Colombia", "Brasil y México exclusivamente", "Solo en Uruguay", "Ecuador y Venezuela"],
+    "correcta": 0,
+    "explicacion": "PRÜNE se expandió con éxito a nivel regional, abriendo tiendas en Chile, Uruguay, Perú y Colombia."
+  },
+  {
+    "id": 5,
+    "pregunta": "¿Cómo se llama la línea de la marca que incluye fragancias y productos de belleza?",
+    "opciones": ["PRÜNE Home", "PRÜNE Beauty", "PRÜNE Care", "PRÜNE Essentials"],
+    "correcta": 1,
+    "explicacion": "PRÜNE Beauty ofrece una cuidada colección de perfumes, cremas y fragancias pensadas para la mujer moderna."
+  }
+]

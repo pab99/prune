@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRÜNE - Dashboard Administrativo</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Estilos específicos para la vista de panel sin romper la estética global */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .metric-card {
+            background: #ffffff;
+            border: 1px solid #e5e0da;
+            padding: 20px;
+            text-align: center;
+        }
+        .metric-card h3 {
+            margin: 0;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+        }
+        .metric-card p {
+            margin: 10px 0 0 0;
+            font-size: 2rem;
+            font-weight: 300;
+            color: #1a1a1a;
+        }
+        .table-container {
+            background: #ffffff;
+            border: 1px solid #e5e0da;
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+        th, td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e5e0da;
+        }
+        th {
+            background-color: #f4f1ec;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            color: #1a1a1a;
+        }
+        tr:hover {
+            background-color: #fcfbfa;
+        }
+        .btn-refresh {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" style="max-width: 800px;">
+        <!-- Encabezado del Dashboard -->
+        <header class="trivia-header">
+            <h1 class="brand-title">PRÜNE</h1>
+            <p class="brand-subtitle">Panel de Control & Auditoría de Trivia</p>
+        </header>
+
+        <!-- Bloque de Métricas Rápidas -->
+        <section class="metrics-grid">
+            <div class="metric-card">
+                <h3>Partidas Jugadas</h3>
+                <p id="total-games">0</p>
+            </div>
+            <div class="metric-card">
+                <h3>Respuestas Correctas</h3>
+                <p id="total-correct" style="color: #27ae60;">0</p>
+            </div>
+            <div class="metric-card">
+                <h3>Efectividad Promedio</h3>
+                <p id="avg-accuracy">0%</p>
+            </div>
+        </section>
+
+        <!-- Tabla de Resultados Detallados -->
+        <main class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID Sesión</th>
+                        <th>Preguntas Respondidas</th>
+                        <th>Aciertos</th>
+                        <th>Última Actividad</th>
+                    </tr>
+                </thead>
+                <tbody id="dashboard-rows">
+                    <!-- Los datos simulados o del backend se inyectan acá -->
+                    <tr>
+                        <td colspan="4" style="text-align: center; color: #666;">Cargando registros de auditoría...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+
+        <button id="refresh-btn" class="btn btn-refresh">Actualizar Métricas</button>
+        
+        <footer class="trivia-footer">
+            <a href="index.html" class="qr-link">← Volver al Inicio</a>
+        </footer>
+    </div>
+
+    <script>
+        // Lógica interna para rellenar el dashboard de forma dinámica
+        document.addEventListener('DOMContentLoaded', () => {
+            cargarDatosDashboard();
+            document.getElementById('refresh-btn').addEventListener('click', cargarDatosDashboard);
+        });
+
+        function cargarDatosDashboard() {
+            // Nota: Aquí podés conectarlo a un endpoint real de tu backend si guardás las métricas.
+            // Por ahora, genera datos base consistentes con la estética para que no quede vacío al subirlo.
+            const tabla = document.getElementById('dashboard-rows');
+            
+            // Simulación de logs de analítica de juego para PRÜNE
+            const datosSimulados = [
+                { id: "PRN-9281", respondidas: 5, aciertos: 4, tiempo: "Hace 2 min" },
+                { id: "PRN-4721", respondidas: 5, aciertos: 5, tiempo: "Hace 15 min" },
+                { id: "PRN-1092", respondidas: 3, aciertos: 1, tiempo: "Hace 1 hora" }
+            ];
+
+            let totalJugadas = datosSimulados.length;
+            let totalCorrectas = datosSimulados.reduce((acc, curr) => acc + curr.aciertos, 0);
+            let totalRespondidas = datosSimulados.reduce((acc, curr) => acc + curr.respondidas, 0);
+            let efectividad = totalRespondidas > 0 ? Math.round((totalCorrectas / totalRespondidas) * 100) : 0;
+
+            // Actualizar tarjetas de métricas
+            document.getElementById('total-games').textContent = totalJugadas;
+            document.getElementById('total-correct').textContent = totalCorrectas;
+            document.getElementById('avg-accuracy').textContent = `${efectividad}%`;
+
+            // Renderizar filas de la tabla
+            tabla.innerHTML = '';
+            datosSimulados.forEach(log => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><strong>${log.id}</strong></td>
+                    <td>${log.respondidas}</td>
+                    <td><span style="color: ${log.aciertos >= 4 ? '#27ae60' : '#1a1a1a'}">${log.aciertos}</span></td>
+                    <td style="color: #666;">${log.tiempo}</td>
+                `;
+                tabla.appendChild(row);
+            });
+        }
+    </script>
+</body>
+</html>
