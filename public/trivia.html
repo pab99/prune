@@ -3,49 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PRÜNE - Jugando Trivia</title>
+    <title>Trivia PRÜNE</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="container">
-        <!-- Encabezado -->
-        <header class="trivia-header">
-            <h1 class="brand-title">PRÜNE</h1>
-            <p class="brand-subtitle">Marroquinería & Moda</p>
+    <div class="game-container">
+        <header>
+            <h1>PRÜNE Trivia</h1>
+            <div class="score-board">
+                <span>Pregunta: <id id="current-question">1</id>/<span id="total-questions">5</span></span>
+                <span>Puntaje: <id id="score">0</id></span>
+            </div>
         </header>
 
-        <!-- Contenedor del Juego -->
-        <main class="quiz-container">
-            <div id="question-box">
-                <h2 id="question-text">Cargando pregunta...</h2>
-                <div id="options-container" class="options-grid">
-                    <!-- Las opciones se inyectan mediante script.js -->
-                </div>
+        <div class="quiz-box">
+            <div id="question-container">
+                <p id="question-text">Cargando pregunta...</p>
+                <div id="options-container"></div>
             </div>
-            
-            <div id="feedback-box" class="hidden">
+            <div id="feedback" class="hidden">
                 <p id="feedback-text"></p>
-                <button id="next-btn" class="btn">Siguiente Pregunta</button>
+                <button id="next-btn" class="btn">Siguiente</button>
             </div>
-        </main>
+        </div>
 
-        <!-- Bloque de Datos Curiosos Dinámicos -->
-        <section class="fun-fact-section">
+        <div class="fact-box">
             <h3>¿Sabías qué?</h3>
-            <p id="fun-fact-display">Cargando dato curioso...</p>
-        </section>
+            <p id="fact-text">Cargando dato curioso...</p>
+        </div>
 
-        <!-- Footer con QR hacia la URL de Render -->
-        <footer class="trivia-footer">
-            <div class="qr-container">
+        <footer>
+            <div class="qr-box">
                 <p>¡Escaneá para jugar en tu celular!</p>
-                <img id="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://prune.onrender.com" alt="QR PRÜNE Trivia">
-                <br>
-                <a href="https://prune.onrender.com" target="_blank" class="qr-link">prune.onrender.com</a>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://prune-prap.onrender.com" alt="QR Code">
+                <p class="url">prune-prap.onrender.com</p>
             </div>
         </footer>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
