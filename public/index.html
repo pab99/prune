@@ -3,37 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PRÜNE - Trivia Experience</title>
+    <title>Trivia Interactiva - PRÜNE</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="container">
-        <!-- Pantalla de Login / Registro de Usuario -->
-        <div id="login-screen" class="card">
-            <h1 class="brand-title">PRÜNE</h1>
-            <p class="brand-subtitle">Trivia Oficial</p>
-            <p class="instruction-text">Ingresá tu usuario de Instagram para comenzar a jugar:</p>
-            <input type="text" id="username-input" placeholder="@usuario_instagram" autocomplete="off">
-            <button id="start-game-btn" class="btn">Ingresar al Juego</button>
+    <div id="setup-container">
+        <h1>PRÜNE TRIVIA</h1>
+        <h2>Bienvenido a la Trivia Oficial</h2>
+        <p>Demostrá cuánto sabés sobre nuestra historia, marroquinería, calzado y colecciones.</p>
+        <input type="text" id="username" placeholder="Ingresá tu usuario de Instagram" readonly>
+        
+        <div id="keyboard">
+            <!-- Fila 1 -->
+            <button onclick="pressKey('Q')">Q</button>
+            <button onclick="pressKey('W')">W</button>
+            <button onclick="pressKey('E')">E</button>
+            <button onclick="pressKey('R')">R</button>
+            <button onclick="pressKey('T')">T</button>
+            <button onclick="pressKey('Y')">Y</button>
+            <button onclick="pressKey('U')">U</button>
+            <button onclick="pressKey('I')">I</button>
+            <button onclick="pressKey('O')">O</button>
+            <button onclick="pressKey('P')">P</button>
+            <br>
+            <!-- Fila 2 -->
+            <button onclick="pressKey('A')">A</button>
+            <button onclick="pressKey('S')">S</button>
+            <button onclick="pressKey('D')">D</button>
+            <button onclick="pressKey('F')">F</button>
+            <button onclick="pressKey('G')">G</button>
+            <button onclick="pressKey('H')">H</button>
+            <button onclick="pressKey('J')">J</button>
+            <button onclick="pressKey('K')">K</button>
+            <button onclick="pressKey('L')">L</button>
+            <button onclick="pressKey('Ñ')">Ñ</button>
+            <br>
+            <!-- Fila 3 -->
+            <button onclick="pressKey('Z')">Z</button>
+            <button onclick="pressKey('X')">X</button>
+            <button onclick="pressKey('C')">C</button>
+            <button onclick="pressKey('V')">V</button>
+            <button onclick="pressKey('B')">B</button>
+            <button onclick="pressKey('N')">N</button>
+            <button onclick="pressKey('M')">M</button>
+            <button onclick="pressKey('_')">_</button>
+            <button onclick="pressKey('.')">.</button>
+            <button onclick="deleteKey()" class="wide">Borrar</button>
+            <br>
+            <!-- Fila 4 -->
+            <button onclick="pressKey('1')">1</button>
+            <button onclick="pressKey('2')">2</button>
+            <button onclick="pressKey('3')">3</button>
+            <button onclick="pressKey('4')">4</button>
+            <button onclick="pressKey('5')">5</button>
+            <button onclick="pressKey('6')">6</button>
+            <button onclick="pressKey('7')">7</button>
+            <button onclick="pressKey('8')">8</button>
+            <button onclick="pressKey('9')">9</button>
+            <button onclick="pressKey('0')">0</button>
         </div>
 
-        <!-- Pantalla del Juego Activo (Se revela al ingresar) -->
-        <div id="game-screen" class="card hidden">
-            <header class="game-header">
-                <span id="player-display"></span>
-                <span id="score-display">Puntaje: 0</span>
-            </header>
-            <main class="quiz-box">
-                <h2 id="question-text">Cargando pregunta...</h2>
-                <div id="options-container" class="options-grid"></div>
-                <div id="feedback-container" class="hidden">
-                    <p id="feedback-text"></p>
-                    <button id="next-question-btn" class="btn">Siguiente</button>
-                </div>
-            </main>
-        </div>
+        <button id="start-btn">INGRESAR</button>
     </div>
-    <!-- Carga de Socket.io y tu script original de juego -->
+
+    <div id="quiz-container" style="display: none;">
+        <div id="question-header">
+            <span id="player-name"></span>
+            <span id="score-display">Puntaje: 0</span>
+        </div>
+        <h2 id="question"></h2>
+        <div id="options"></div>
+        <div id="feedback"></div>
+    </div>
+
     <script src="/socket.io/socket.io.js"></script>
     <script src="script.js"></script>
 </body>
