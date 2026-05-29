@@ -1,12 +1,14 @@
 {
-  "name": "trivia-prune",
+  "name": "trivia-prune-prap",
   "version": "1.0.0",
-  "description": "Trivia interactiva sobre la marca PRÜNE",
+  "description": "Trivia interactiva de la marca PRÜNE",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "mongodb": "^6.5.0",
+    "socket.io": "^4.7.5"
   }
 }
