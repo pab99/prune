@@ -1,9 +1,6 @@
 {
-  "datosCuriosos": [
-    "PRÜNE nació como un proyecto familiar para modernizar y dar diseño de autor al cuero legítimo en Argentina.",
-    "El nombre 'PRÜNE' fue seleccionado estratégicamente por su sonoridad sofisticada, corta y de impronta europea.",
-    "Cada temporada, los diseñadores de la marca se inspiran en las tendencias de las principales capitales de la moda como Milán y París.",
-    "Además de carteras, sus camperas de cuero y su línea de calzado se convirtieron rápidamente en artículos de culto.",
-    "Fue una de las primeras marcas argentinas de marroquinería en expandir con éxito su experiencia de tienda boutique a los grandes centros comerciales."
-  ]
+  "tituloInicio": "PRÜNE TRIVIA",
+  "subtituloInicio": "Bienvenido a la Trivia Oficial",
+  "descripcionInicio": "Demostrá cuánto sabés sobre nuestra historia, marroquinería, calzado y colecciones.",
+  "mensajeFinal": "¡Completaste la Trivia de PRÜNE! Gracias por participar."
 }
