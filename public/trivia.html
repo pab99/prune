@@ -3,114 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PRÜNE - Pantalla de Trivia</title>
+    <title>Pantalla Principal - Trivia PRÜNE</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-    <div class="screen-container">
-        <!-- Encabezado de la Proyección -->
-        <header class="main-screen-header">
-            <h1 class="screen-brand-title">PRÜNE</h1>
-            <p class="screen-brand-subtitle">Ranking en Tiempo Real</p>
-        </header>
-
-        <!-- Bloque Principal: QR a la izquierda, Tabla de posiciones a la derecha -->
-        <div class="screen-layout">
-            <!-- Contenedor del QR de acceso para los celulares -->
-            <div class="qr-showcase">
-                <h2>¡ESCANEÁ Y JUGÁ!</h2>
-                <img id="qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://prune-prap.onrender.com" alt="QR Trivia Prune">
-                <p class="url-display">prune-prap.onrender.com</p>
-            </div>
-
-            <!-- Tabla de posiciones del Ranking conectada por Sockets -->
-            <div class="ranking-showcase">
-                <h2>Top Players</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Puesto</th>
-                            <th>Usuario</th>
-                            <th>Puntaje</th>
-                            <th>Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody id="ranking-table-body">
-                        <!-- Sincronizado dinámicamente por la lógica de sockets original -->
-                        <tr>
-                            <td colspan="4" class="empty-table">Esperando jugadores...</td>
-                        </tr>
-                    </tbody>
-                </table>
+<body class="main-screen">
+    <div class="screen-layout">
+        <div class="left-panel">
+            <h1>PRÜNE</h1>
+            <h2>RANKING EN VIVO</h2>
+            <div id="dashboard">
+                <p>Esperando jugadores...</p>
             </div>
         </div>
-
-        <!-- Sección Inferior de Datos Curiosos Rotativos -->
-        <footer class="screen-footer-fact">
-            <div class="fact-highlight">
-                <h3>¿Sabías qué?</h3>
-                <p id="rotating-fact">Cargando datos curiosos de la marca...</p>
+        <div class="right-panel">
+            <div class="qr-container">
+                <h3>¡ESCANEÁ Y JUGÁ!</h3>
+                <!-- QR apuntando de forma exacta a tu nueva URL en Render -->
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://prune-prap.onrender.com" alt="QR Code">
+                <p class="url-text">prune-prap.onrender.com</p>
             </div>
-        </footer>
+            <div class="fact-container">
+                <h3>¿SABÍAS QUÉ?</h3>
+                <p id="curiosidad">Cargando datos curiosos...</p>
+            </div>
+        </div>
     </div>
 
-    <!-- Script de sockets para la pantalla de proyección -->
     <script src="/socket.io/socket.io.js"></script>
     <script>
         const socket = io();
-        let currentIndexFact = 0;
-        let factsList = [];
+        let curiosidades = [];
+        let curiosidadIndex = 0;
 
-        // Escucha la actualización del ranking global desde el server.js original
+        // Escucha original para actualizar el ranking en vivo
         socket.on('updateDashboard', (jugadores) => {
-            const tbody = document.getElementById('ranking-table-body');
-            if(!tbody) return;
-            
-            // Ordena los jugadores por puntaje de mayor a menor
-            const ordenados = jugadores.sort((a, b) => b.score - a.score);
-            
-            tbody.innerHTML = '';
-            if(ordenados.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="4" class="empty-table">Esperando jugadores...</td></tr>';
-                return;
-            }
+            const dashboard = document.getElementById('dashboard');
+            dashboard.innerHTML = '';
 
-            ordenados.forEach((jugador, index) => {
-                const fila = document.createElement('tr');
-                fila.innerHTML = `
-                    <td><strong>#${index + 1}</strong></td>
-                    <td>${jugador.username}</td>
-                    <td>${jugador.score} pts</td>
-                    <td class="${jugador.completed ? 'status-done' : 'status-playing'}">
-                        ${jugador.completed ? 'Finalizado' : 'Jugando'}
-                    </td>
+            // Ordenar jugadores por puntaje de mayor a menor
+            const ordenados = jugadores.sort((a, b) => b.score - a.score);
+
+            ordenados.slice(0, 10).forEach((j, index) => {
+                const div = document.createElement('div');
+                div.className = 'player-row';
+                if (j.completed) div.classList.add('completed');
+                div.innerHTML = `
+                    <span class="position">#${index + 1}</span>
+                    <span class="name">${j.username}</span>
+                    <span class="score">${j.score} pts</span>
                 `;
-                tbody.appendChild(fila);
+                dashboard.appendChild(div);
             });
+
+            if (ordenados.length === 0) {
+                dashboard.innerHTML = '<p>Esperando jugadores...</p>';
+            }
         });
 
-        // Trae los datos curiosos de PRÜNE desde tu API local
-        async function inicializarDatosCuriosos() {
-            try {
-                const res = await fetch('/api/contenido');
-                const data = await res.json();
-                factsList = data.datosCuriosos || [];
-                rotarFact();
-                setInterval(rotarFact, 8000); // Rota cada 8 segundos
-            } catch (err) {
-                console.error("Error al cargar curiosidades:", err);
-            }
-        }
+        // Carga dinámica de los nuevos datos curiosos de PRÜNE
+        fetch('/api/contenido')
+            .then(res => res.json())
+            .then(data => {
+                curiosidades = data.datosCuriosos;
+                if (curiosidades && curiosidades.length > 0) {
+                    mostrarSiguienteCuriosidad();
+                    setInterval(mostrarSiguienteCuriosidad, 10000); // Rotación cada 10 segundos original
+                }
+            });
 
-        function rotarFact() {
-            const p = document.getElementById('rotating-fact');
-            if(p && factsList.length > 0) {
-                p.textContent = factsList[currentIndexFact];
-                currentIndexFact = (currentIndexFact + 1) % factsList.length;
-            }
+        function mostrarSiguienteCuriosidad() {
+            const p = document.getElementById('curiosidad');
+            p.textContent = curiosidades[curiosidadIndex];
+            curiosidadIndex = (curiosidadIndex + 1) % curiosidades.length;
         }
-
-        document.addEventListener('DOMContentLoaded', inicializarDatosCuriosos);
     </script>
 </body>
 </html>
