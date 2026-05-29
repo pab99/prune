@@ -7,20 +7,34 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="container home-container">
-        <header class="main-header">
+    <div class="container">
+        <!-- Pantalla de Login / Registro de Usuario -->
+        <div id="login-screen" class="card">
             <h1 class="brand-title">PRÜNE</h1>
-            <p class="brand-subtitle">Bienvenido a la Trivia Oficial</p>
-        </header>
-        
-        <main class="welcome-box">
-            <p>Demostrá cuánto sabés sobre nuestra historia, marroquinería, calzado y colecciones.</p>
-            <a href="trivia.html" class="btn btn-start">Comenzar a Jugar</a>
-        </main>
+            <p class="brand-subtitle">Trivia Oficial</p>
+            <p class="instruction-text">Ingresá tu usuario de Instagram para comenzar a jugar:</p>
+            <input type="text" id="username-input" placeholder="@usuario_instagram" autocomplete="off">
+            <button id="start-game-btn" class="btn">Ingresar al Juego</button>
+        </div>
 
-        <footer class="main-footer">
-            <p>Desafiá tus conocimientos de moda</p>
-        </footer>
+        <!-- Pantalla del Juego Activo (Se revela al ingresar) -->
+        <div id="game-screen" class="card hidden">
+            <header class="game-header">
+                <span id="player-display"></span>
+                <span id="score-display">Puntaje: 0</span>
+            </header>
+            <main class="quiz-box">
+                <h2 id="question-text">Cargando pregunta...</h2>
+                <div id="options-container" class="options-grid"></div>
+                <div id="feedback-container" class="hidden">
+                    <p id="feedback-text"></p>
+                    <button id="next-question-btn" class="btn">Siguiente</button>
+                </div>
+            </main>
+        </div>
     </div>
+    <!-- Carga de Socket.io y tu script original de juego -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
