@@ -4,7 +4,7 @@ const fs = require('fs');
 const http = require('http');
 const { MongoClient } = require('mongodb');
 const socketIo = require('socket.io');
-const datosCuriosos = require('./datos-curiosos.js'); // Carga tus datos de Prüne sueltos en la raíz[cite: 1, 2]
+const datosCuriosos = require('./datos_curiosos.js'); // Carga tus datos de Prüne sueltos en la raíz[cite: 1, 2]
 
 const app = express();
 const server = http.createServer(app);
